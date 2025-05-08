@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestão de Públicos-Alvo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/publicos.css">
+</head>
+<body>
+    <div class="container mt-3">
+        <a href="administrador.html" class="btn btn-outline-secondary mb-3">
+            <i class="bi bi-arrow-left-circle"></i> Voltar ao Início
+        </a>
+    </div>
+    
+    <main class="container mt-4">
+        <h2><i class="bi bi-people"></i> Cadastro de Público-Alvo</h2>
+        
+        <div class="card mb-4">
+            <div class="card-body">
+                <form id="formPublico" class="mb-0">
+                    <div class="row g-3">
+                        <div class="col-md-8">
+                            <label class="form-label">Nome do Público-Alvo</label>
+                            <input type="text" class="form-control" id="nomePublico" 
+                                placeholder="Digite o nome do público-alvo" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Situação</label>
+                            <select class="form-select" id="situacaoPublico" required>
+                                <option value="Ativo">Ativo</option>
+                                <option value="Inativo">Inativo</option>
+                            </select>
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-plus-circle"></i> Salvar Público-Alvo
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <h3><i class="bi bi-list-ul"></i> Públicos-Alvo Cadastrados</h3>
+        
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="row g-3">
+                    <div class="col-md-8">
+                        <label class="form-label">Filtrar por Nome</label>
+                        <input type="text" class="form-control" id="filtroNome" 
+                            placeholder="Digite para filtrar">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Filtrar por Situação</label>
+                        <select class="form-select" id="filtroSituacao">
+                            <option value="Todos">Todos</option>
+                            <option value="Ativo">Ativos</option>
+                            <option value="Inativo">Inativos</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="listaPublicos" class="row"></div>
+        
+        <!-- Modal de Edição -->
+        <div class="modal fade" id="modalEdicaoPublico" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form id="formEdicaoPublico">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Editar Público-Alvo</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <input type="hidden" id="publicoIndex">
+                            <div class="mb-3">
+                                <label class="form-label">Nome do Público-Alvo</label>
+                                <input type="text" class="form-control" id="editNomePublico" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Situação</label>
+                                <select class="form-select" id="editSituacaoPublico" required>
+                                    <option value="Ativo">Ativo</option>
+                                    <option value="Inativo">Inativo</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/publicos.js"></script>
+</body>
+</html>

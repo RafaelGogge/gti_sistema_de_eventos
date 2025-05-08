@@ -1,0 +1,356 @@
+<!--
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Painel de Eventos - Início</title>
+
+
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+<link rel="stylesheet" href="">
+<link rel="stylesheet" href="public/css/index.css">
+  
+</head>
+
+<body>
+
+
+  <div class="container my-4">
+    <div class="header position-relative">
+      <img src="public/img/gov.jpeg" alt="Logo do Governo">
+      <h1 id="tituloDinamico">EVENTOS VIGILÂNCIA EM SAÚDE</h1>
+      <small>DIA <span id="dataAtual">--</span></small>
+    </div>
+
+
+    <div class="info-box">
+      <div class="info-item">
+        <div class="highlight-title">EVENTO DESTAQUE:</div>
+        <strong>Nome:</strong> <span id="eventoDestaque">Carregando...</span>
+      </div>
+      <div class="info-item">
+        <strong>DATA:</strong> <span id="dataEvento">--</span><br>
+        <strong>LOCAL:</strong> <span id="localEvento">--</span>
+      </div>
+      <div class="info-item">
+        <strong>NÚMERO DE PARTICIPANTES:</strong> <span id="numParticipantes">--</span><br>
+        <strong>PARTICIPAÇÃO ESPECIAL:</strong> <span id="participacaoEspecial">--</span>
+      </div>
+    </div>
+
+
+    <div class="table-section">
+      <table class="table table-bordered text-center align-middle">
+        <thead class="table-primary">
+          <tr>
+            <th>EVENTOS</th>
+            <th>LOCAL</th>
+            <th>DATA</th>
+            <th>HORA</th>
+            <th>SITUAÇÃO</th>
+          </tr>
+        </thead>
+        <tbody id="tabelaEventos">
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="footer">
+    © 2025 Sistema de Eventos. Desenvolvido por Rafael Vieira Gogge - Analista Desenvolvedor
+  </div>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // Atualiza a data atual
+      const hoje = new Date().toLocaleDateString("pt-BR");
+      document.getElementById("dataAtual").textContent = hoje;
+
+      // Buscar os eventos do localStorage
+      const eventos = JSON.parse(localStorage.getItem("eventos")) || [];
+
+      // Evento destacado (aquele que tem destacarEvento=true)
+      const destaque = eventos.find(e => e.destacarEvento);
+      if (destaque) {
+        document.getElementById("eventoDestaque").textContent = destaque.nome || "N/A";
+        document.getElementById("dataEvento").textContent = destaque.data || "--";
+        document.getElementById("localEvento").textContent = destaque.local || "--";
+        document.getElementById("numParticipantes").textContent = destaque.numParticipantes || "--";
+        document.getElementById("participacaoEspecial").textContent = destaque.participacaoEspecial || "Nenhuma";
+        document.getElementById("tituloDinamico").textContent = "EVENTOS " + (destaque.setor ? destaque.setor.toUpperCase() : "VIGILÂNCIA EM SAÚDE");
+      }
+
+      // Preencher a tabela de eventos
+      const tabela = document.getElementById("tabelaEventos");
+      eventos.forEach(ev => {
+        if (ev.excluido === true) return;
+        const linha = document.createElement("tr");
+        linha.innerHTML = `
+          <td><strong>${ev.nome}</strong></td>
+          <td>${ev.local}</td>
+          <td>${ev.data}</td>
+          <td>${ev.horaInicio} às ${ev.horaFim}</td>
+          <td>
+            ${ev.exibirPainel ? '<span class="status-realizado">REALIZADO</span>' : '<span class="status-previsto">PREVISTO</span>'}
+          </td>
+        `;
+        tabela.appendChild(linha);
+      });
+    });
+  </script>
+
+</body>
+
+</html>
+
+-->
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Painel de Eventos - Simulação</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-dark: #2c3e50;
+      --primary: #007bff;
+      --highlight: #ffc107;
+      --text-light: #fff;
+      --text-muted: #ccc;
+    }
+
+    body {
+      margin: 0;
+      background-color: #f4f4f4;
+      font-family: 'Roboto', sans-serif;
+      font-size: 22px;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1920px;
+      margin: auto;
+      padding: 2rem;
+    }
+
+    .header {
+      background: linear-gradient(90deg, #004d99, #6f42c1);
+      color: var(--text-light);
+      padding: 40px 30px;
+      border-radius: 12px;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .header img {
+      position: absolute;
+      left: 30px;
+      top: 30px;
+      width: 80px;
+    }
+
+    .header h1 {
+      font-size: 2.8rem;
+      margin-bottom: 10px;
+    }
+
+    .header small {
+      position: absolute;
+      right: 30px;
+      top: 35px;
+      background: rgba(255, 255, 255, 0.15);
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-size: 1.1rem;
+    }
+
+    .info-box {
+      background-color: var(--bg-dark);
+      color: white;
+      padding: 30px;
+      border-radius: 12px;
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 25px;
+      margin-top: 30px;
+      animation: fadein 0.8s ease-in-out;
+    }
+
+    .info-item {
+      flex: 1 1 280px;
+      background-color: #34495e;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    .highlight-title {
+      font-size: 1.8rem;
+      color: var(--highlight);
+      font-weight: bold;
+    }
+
+    .table-section {
+      margin-top: 50px;
+    }
+
+    table th {
+      font-size: 1.2rem;
+    }
+
+    table td {
+      font-size: 1.1rem;
+    }
+
+    .status {
+      padding: 8px 16px;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+
+    .status-previsto {
+      background-color: #f39c12;
+      color: white;
+    }
+
+    .status-acontecendo {
+      background-color: #28a745;
+      color: white;
+    }
+
+    .status-realizado {
+      background-color: #3498db;
+      color: white;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: auto;
+      padding: 20px;
+      font-size: 1rem;
+      color: var(--text-muted);
+    }
+
+    @keyframes fadein {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media screen and (max-width: 768px) {
+      .info-box {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .header h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="header position-relative">
+      <img src="public/img/gov.jpeg" alt="Logo do Governo">
+      <h1 id="tituloDinamico">EVENTOS VIGILÂNCIA EM SAÚDE</h1>
+      <small>DIA <span id="dataAtual">--</span></small>
+    </div>
+    <div class="info-box">
+      <div class="info-item">
+        <span class="highlight-title">Evento Destaque</span><br />
+        Campanha Nacional de Vacinação
+      </div>
+      <div class="info-item">
+        <strong>Data:</strong> 15/04/2025<br>
+        <strong>Local:</strong> Secretaria de Estado da Saúde<br>
+        <strong>Horário:</strong> 12:00 às 14:00
+      </div>
+      <div class="info-item">
+        <strong>Nº de Participantes:</strong> 100<br />
+        <strong>Participação:</strong> Governador Renato Casagrande
+      </div>
+    </div>
+    <div class="table-section">
+      <table class="table table-bordered text-center align-middle table-hover">
+        <thead class="table-primary">
+          <tr>
+            <th>Evento</th>
+            <th>Local</th>
+            <th>Data</th>
+            <th>Horário</th>
+            <th>Situação</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Vacinação contra Influenza</strong></td>
+            <td>UBS Maruípe</td>
+            <td>15/04/2025</td>
+            <td>08:00 às 12:00</td>
+            <td><span class="status status-realizado">REALIZADO</span></td>
+          </tr>
+          <tr>
+            <td><strong>Treinamento de ACS</strong></td>
+            <td>ESESP</td>
+            <td>15/04/2025</td>
+            <td>13:00 às 14:00</td>
+            <td><span class="status status-acontecendo">ACONTECENDO</span></td>
+          </tr>
+          <tr>
+            <td><strong>Palestra sobre Arboviroses</strong></td>
+            <td>Auditório SESA</td>
+            <td>15/04/2025</td>
+            <td>15:30 às 17:30</td>
+            <td><span class="status status-previsto">PREVISTO</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="footer">
+      © 2025 Sistema de Eventos. <br> Desenvolvedor - Rafael Vieira Gogge
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const data = new Date().toLocaleDateString("pt-BR");
+      document.getElementById("dataAtual").textContent = data;
+    });
+  </script>
+
+</body>
+
+</html>
+-->

@@ -1,0 +1,13 @@
+
+@import url('./style.css');
+
+.list-group-item {
+  font-size: 1.1rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.list-group-item:hover {
+  background-color: #f1f1f1;
+  transform: scale(1.01);
+}
+

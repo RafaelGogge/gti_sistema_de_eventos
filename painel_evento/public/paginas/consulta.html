@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Consulta de Eventos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/consulta.css">
+</head>
+<body>
+    <div class="container mt-3">
+        <a href="administrador.html" class="btn btn-outline-secondary mb-3">
+            <i class="bi bi-arrow-left-circle"></i> Voltar ao Início
+        </a>
+    </div>
+
+    <main class="container mt-4">
+        <h2><i class="bi bi-search"></i> Consulta de Eventos</h2>
+        
+        <!-- Filtros de consulta -->
+        <div class="card mb-4">
+            <div class="card-header bg-light">
+                <h5 class="mb-0">Filtros</h5>
+            </div>
+            <div class="card-body">
+                <form id="formFiltros" class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label">Nome do Evento</label>
+                        <input type="text" class="form-control" id="filtroNome" placeholder="Digite o nome ou parte dele">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Data Inicial</label>
+                        <input type="date" class="form-control" id="filtroDataInicial">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Data Final</label>
+                        <input type="date" class="form-control" id="filtroDataFinal">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Local</label>
+                        <select class="form-select" id="filtroLocal">
+                            <option value="">Todos os locais</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Setor</label>
+                        <select class="form-select" id="filtroSetor">
+                            <option value="">Todos os setores</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Situação</label>
+                        <select class="form-select" id="filtroSituacao">
+                            <option value="Ativo">Ativos</option>
+                            <option value="Excluido">Excluídos</option>
+                            <option value="Todos">Todos</option>
+                        </select>
+                    </div>
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-search"></i> Buscar
+                        </button>
+                        <button type="reset" class="btn btn-outline-secondary">
+                            <i class="bi bi-x-circle"></i> Limpar Filtros
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Resultados da consulta -->
+        <div id="resultadoEventos" class="row mt-4"></div>
+        
+        <!-- Modal de detalhes -->
+        <div class="modal fade" id="modalDetalhes" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Detalhes do Evento</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="detalhesEvento"></div>
+                        
+                        <h6 class="mt-4 border-top pt-3">Histórico de Alterações</h6>
+                        <div class="table-responsive">
+                            <table class="table table-sm table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Data</th>
+                                        <th>Responsável</th>
+                                        <th>Ação</th>
+                                        <th>Justificativa</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="historicoEvento"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/consulta.js"></script>
+</body>
+</html>

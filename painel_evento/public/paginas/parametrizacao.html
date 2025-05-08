@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Parametrização do Painel</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/parametrizacao.css">
+</head>
+<body>
+    <div class="container mt-3">
+        <a href="administrador.html" class="btn btn-outline-secondary mb-3">
+            <i class="bi bi-arrow-left-circle"></i> Voltar ao Início
+        </a>
+    </div>
+    
+    <main class="container mt-4">
+        <h2><i class="bi bi-sliders"></i> Parametrização do Painel de Eventos</h2>
+        
+        <div class="card mb-4">
+            <div class="card-body">
+                <form id="formParametrizacao" class="mb-0">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Período de Exibição</label>
+                            <select class="form-select" id="periodoExibicao" required>
+                                <option value="Diario">Diário</option>
+                                <option value="Semanal">Semanal</option>
+                                <option value="Mensal">Mensal</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Tempo de Atualização (segundos)</label>
+                            <input type="number" class="form-control" id="tempoAtualizacao" 
+                                min="10" max="300" value="60" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Cor de Fundo do Painel</label>
+                            <input type="color" class="form-control form-control-color w-100" 
+                                id="corFundoPainel" value="#ffffff">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Cor do Texto do Painel</label>
+                            <input type="color" class="form-control form-control-color w-100" 
+                                id="corTextoPainel" value="#000000">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Cor de Destaque</label>
+                            <input type="color" class="form-control form-control-color w-100" 
+                                id="corDestaque" value="#007bff">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Tamanho da Fonte (px)</label>
+                            <input type="number" class="form-control" id="tamanhoFonte" 
+                                min="12" max="32" value="16" required>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="exibirLogo" checked>
+                                <label class="form-check-label" for="exibirLogo">
+                                    Exibir Logo da SSVS
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="exibirRelogio" checked>
+                                <label class="form-check-label" for="exibirRelogio">
+                                    Exibir Relógio no Painel
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-save"></i> Salvar Configurações
+                            </button>
+                            <a href="index.html" target="_blank" class="btn btn-outline-primary ms-2">
+                                <i class="bi bi-display"></i> Visualizar Painel
+                            </a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-header bg-light">
+                <h5 class="mb-0">Prévia do Painel</h5>
+            </div>
+            <div class="card-body">
+                <div id="previaPainel" class="border p-3 rounded">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <div>
+                            <h4>Painel de Eventos SSVS</h4>
+                            <p class="mb-0">Exibindo eventos do dia</p>
+                        </div>
+                        <div id="previaRelogio">10:30</div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card mb-3 border-primary">
+                                <div class="card-header bg-primary text-white">
+                                    <strong>Evento Destacado</strong>
+                                </div>
+                                <div class="card-body">
+                                    <h5>Reunião de Coordenação</h5>
+                                    <p class="mb-1"><strong>Local:</strong> Auditório Principal</p>
+                                    <p class="mb-1"><strong>Data:</strong> 01/01/2023</p>
+                                    <p class="mb-1"><strong>Hora:</strong> 14:00 - 16:00</p>
+                                    <p class="mb-1"><strong>Participantes:</strong> 25</p>
+                                    <p class="mb-0"><strong>Participação Especial:</strong> Secretário de Saúde</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h5>Treinamento de Equipe</h5>
+                                    <p class="mb-1"><strong>Local:</strong> Sala de Reuniões</p>
+                                    <p class="mb-1"><strong>Data:</strong> 01/01/2023</p>
+                                    <p class="mb-1"><strong>Hora:</strong> 09:00 - 11:00</p>
+                                    <p class="mb-0"><strong>Situação:</strong> Em andamento</p>
+                                </div>
+                            </div>
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h5>Palestra sobre Vigilância</h5>
+                                    <p class="mb-1"><strong>Local:</strong> Auditório 2</p>
+                                    <p class="mb-1"><strong>Data:</strong> 01/01/2023</p>
+                                    <p class="mb-1"><strong>Hora:</strong> 16:30 - 18:00</p>
+                                    <p class="mb-0"><strong>Situação:</strong> Agendado</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/parametrizacao.js"></script>
+</body>
+</html>

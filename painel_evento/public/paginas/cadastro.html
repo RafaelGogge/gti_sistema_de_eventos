@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro de Evento</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Estilos e ícones -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <main class="container mt-4">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2><i class="bi bi-calendar-plus"></i> Cadastrar Evento</h2>
+            <a href="administrador.html" class="btn btn-outline-secondary">
+                <i class="bi bi-arrow-left-circle"></i> Voltar ao Início
+            </a>
+        </div>
+
+        <form id="formEvento">
+            <div class="mb-3">
+                <label class="form-label">Nome do Evento</label>
+                <input type="text" class="form-control" id="nomeEvento" placeholder="Digite o nome do evento">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Descrição do Evento</label>
+                <textarea class="form-control" id="descricaoEvento" rows="3"
+                    placeholder="Digite a descrição do evento"></textarea>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Local</label>
+                    <select class="form-select" id="localEvento"></select>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Modo do Evento</label>
+                    <select class="form-select" id="modoEvento">
+                        <option value="">Selecione</option>
+                        <option>Presencial</option>
+                        <option>Online</option>
+                        <option>Híbrido</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Número de Participantes</label>
+                <input type="number" class="form-control" id="numParticipantes"
+                    placeholder="Digite o número de participantes">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Público Alvo</label>
+                <select multiple class="form-select" id="publicoAlvoEvento">
+                    <!-- Preenchido via JS -->
+                </select>
+            </div>
+
+            <!-- Períodos do Evento -->
+            <div class="mb-3">
+                <label class="form-label">Períodos do Evento</label>
+                <div id="periodosContainer">
+                    <div class="row align-items-end mb-2 periodo">
+                        <div class="col-md-4">
+                            <label class="form-label">Data</label>
+                            <input type="date" class="form-control" name="dataPeriodo[]">
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">Horário Início</label>
+                            <input type="time" class="form-control" name="horaInicioPeriodo[]">
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">Horário Fim</label>
+                            <input type="time" class="form-control" name="horaFimPeriodo[]">
+                        </div>
+                        <div class="col-md-2">
+                            <button type="button" class="btn btn-danger w-100 removerPeriodo">Remover</button>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-primary" id="adicionarPeriodo">Adicionar Período</button>
+            </div>
+
+            <!-- Estrutura hierárquica de responsáveis -->
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <label class="form-label">Setor</label>
+                    <select class="form-select" id="setorEvento">
+                        <option value="">Selecione um setor</option>
+                    </select>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label class="form-label">Coordenação</label>
+                    <select class="form-select" id="coordenacaoEvento" disabled>
+                        <option value="">Selecione uma coordenação</option>
+                    </select>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label class="form-label">Responsável</label>
+                    <select class="form-select" id="responsavelEvento" disabled>
+                        <option value="">Selecione um responsável</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Órgãos Externos -->
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Participação de Órgãos Externos</label>
+                    <select class="form-select" id="orgaoExternoParticipa">
+                        <option value="">Selecione</option>
+                        <option value="Sim">Sim</option>
+                        <option value="Não">Não</option>
+                    </select>
+                </div>
+                <div class="col-md-6 mb-3" id="campoOrgaoExterno" style="display: none;">
+                    <label class="form-label">Se Sim, informar:</label>
+                    <input type="text" class="form-control" id="orgaoExternoEvento"
+                        placeholder="Informe os órgãos externos">
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Responsável pelo Preenchimento</label>
+                <input type="text" class="form-control" id="responsavelInformacao" value="Usuário Logado" readonly>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Exibir Evento no Painel</label>
+                    <select class="form-select" id="exibirPainel">
+                        <option value="Não">Não</option>
+                        <option value="Sim">Sim</option>
+                    </select>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Destacar Exibição no Painel</label>
+                    <select class="form-select" id="destacarEvento" disabled>
+                        <option value="Não">Não</option>
+                        <option value="Sim">Sim</option>
+                    </select>
+                </div>
+                <div class="col-md-6 mb-3" id="participacaoEspecialContainer" style="display: none;">
+                    <label class="form-label">Participação Especial</label>
+                    <input type="text" class="form-control" id="participacaoEspecial"
+                        placeholder="Digite o nome do participante especial">
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-success w-100">
+                <i class="bi bi-check-circle"></i> Cadastrar Evento
+            </button>
+        </form>
+    </main>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Exibir/ocultar campo de órgãos externos
+        document.getElementById('orgaoExternoParticipa').addEventListener('change', function () {
+            const campo = document.getElementById('campoOrgaoExterno');
+            campo.style.display = this.value === 'Sim' ? 'block' : 'none';
+        });
+
+        // Adicionar e remover períodos
+        document.getElementById('adicionarPeriodo').addEventListener('click', function () {
+            const container = document.getElementById('periodosContainer');
+            const novo = container.querySelector('.periodo').cloneNode(true);
+            novo.querySelectorAll('input').forEach(input => input.value = '');
+            container.appendChild(novo);
+        });
+
+        document.getElementById('periodosContainer').addEventListener('click', function (e) {
+            if (e.target.classList.contains('removerPeriodo')) {
+                const periodos = document.querySelectorAll('.periodo');
+                if (periodos.length > 1) {
+                    e.target.closest('.periodo').remove();
+                }
+            }
+        });
+
+        // Campo de participação especial
+        document.getElementById('destacarEvento').addEventListener('change', function () {
+            const campo = document.getElementById('participacaoEspecialContainer');
+            campo.style.display = this.value === 'Sim' ? 'block' : 'none';
+        });
+    </script>
+    <!-- Corrigido o caminho para o arquivo JS -->
+    <script src="../js/cadastro.js"></script>
+</body>
+
+</html>
